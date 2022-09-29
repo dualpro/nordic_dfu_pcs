@@ -77,6 +77,7 @@ class NordicDfu {
   Future<String?> startDfu(
     String address,
     String filePath, {
+    int? maxMtu,
     String? name,
     bool? fileInAsset,
     bool? forceDfu,
@@ -165,6 +166,7 @@ class NordicDfu {
     return _methodChannel.invokeMethod('startDfu', <String, dynamic>{
       'address': address,
       'filePath': filePath,
+      'maxMtu': maxMtu,
       'name': name,
       'fileInAsset': fileInAsset,
       'forceDfu': forceDfu,
