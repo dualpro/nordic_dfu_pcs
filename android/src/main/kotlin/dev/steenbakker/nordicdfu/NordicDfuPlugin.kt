@@ -110,7 +110,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
         }
     }
 
-    private fun startDfu(address: String, name: String?, maxMtu: int?, filePath: String?, forceDfu: Boolean?, enableUnsafeExperimentalButtonlessServiceInSecureDfu: Boolean?, disableNotification: Boolean?, keepBond: Boolean?, packetReceiptNotificationsEnabled: Boolean?, restoreBond: Boolean?, startAsForegroundService: Boolean?, result: MethodChannel.Result, numberOfPackets: Int?, enablePRNs: Boolean?) {
+    private fun startDfu(address: String, name: String?, maxMtu: int, filePath: String?, forceDfu: Boolean?, enableUnsafeExperimentalButtonlessServiceInSecureDfu: Boolean?, disableNotification: Boolean?, keepBond: Boolean?, packetReceiptNotificationsEnabled: Boolean?, restoreBond: Boolean?, startAsForegroundService: Boolean?, result: MethodChannel.Result, numberOfPackets: Int?, enablePRNs: Boolean?) {
         val starter = DfuServiceInitiator(address)
                 .setZip(filePath!!)
                 .setKeepBond(true)

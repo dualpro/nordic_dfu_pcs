@@ -76,7 +76,7 @@ class NordicDfu {
   /// [onProgressChanged] Callback for when the dfu progress has changed
   Future<String?> startDfu(
     String address,
-    int? maxMtu,
+    int maxMtu,
     String filePath, {
     String? name,
     bool? fileInAsset,
