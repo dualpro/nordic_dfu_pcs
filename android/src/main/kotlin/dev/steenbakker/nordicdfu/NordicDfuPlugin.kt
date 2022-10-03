@@ -69,7 +69,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
     private fun initiateDfu(call: MethodCall, result: MethodChannel.Result) {
         val address = call.argument<String>("address")
         val name = call.argument<String>("name")
-        val maxMtu = call.argument<int>("maxMtu")
+//        val maxMtu = call.argument<int>("maxMtu")
         var filePath = call.argument<String>("filePath")
         var fileInAsset = call.argument<Boolean>("fileInAsset")
         val forceDfu = call.argument<Boolean>("forceDfu")
@@ -110,7 +110,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
         }
     }
 
-    private fun startDfu(address: String, name: String?, maxMtu: int, filePath: String?, forceDfu: Boolean?, enableUnsafeExperimentalButtonlessServiceInSecureDfu: Boolean?, disableNotification: Boolean?, keepBond: Boolean?, packetReceiptNotificationsEnabled: Boolean?, restoreBond: Boolean?, startAsForegroundService: Boolean?, result: MethodChannel.Result, numberOfPackets: Int?, enablePRNs: Boolean?) {
+    private fun startDfu(address: String, name: String?, /*maxMtu: int,*/ filePath: String?, forceDfu: Boolean?, enableUnsafeExperimentalButtonlessServiceInSecureDfu: Boolean?, disableNotification: Boolean?, keepBond: Boolean?, packetReceiptNotificationsEnabled: Boolean?, restoreBond: Boolean?, startAsForegroundService: Boolean?, result: MethodChannel.Result, numberOfPackets: Int?, enablePRNs: Boolean?) {
         val starter = DfuServiceInitiator(address)
                 .setZip(filePath!!)
                 .setKeepBond(true)
