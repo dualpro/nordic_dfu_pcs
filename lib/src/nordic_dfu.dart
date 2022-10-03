@@ -165,8 +165,8 @@ class NordicDfu {
 
     return _methodChannel.invokeMethod('startDfu', <String, dynamic>{
       'address': address,
-      'filePath': filePath,
       'maxMtu': maxMtu,
+      'filePath': filePath,
       'name': name,
       'fileInAsset': fileInAsset,
       'forceDfu': forceDfu,
