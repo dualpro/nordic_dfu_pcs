@@ -68,7 +68,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
 
     private fun initiateDfu(call: MethodCall, result: MethodChannel.Result) {
         val address = call.argument<String>("address")
-        val maxMtu = call.argument<UInt>("maxMtu")
+        val maxMtu = call.argument<UInt>(maxMtu)
         val name = call.argument<String>("name")
         var filePath = call.argument<String>("filePath")
         var fileInAsset = call.argument<Boolean>("fileInAsset")
