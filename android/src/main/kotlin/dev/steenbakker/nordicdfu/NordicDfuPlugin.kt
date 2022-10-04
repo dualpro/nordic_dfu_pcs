@@ -120,13 +120,13 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
                 .setPacketsReceiptNotificationsValue(numberOfPackets ?: 0)
                 .setPrepareDataObjectDelay(400)
                 .setUnsafeExperimentalButtonlessServiceInSecureDfuEnabled(true)
-                .setNumberOfRetries(10).setMTU(maxMtu)
+                .setNumberOfRetries(10)
         if (name != null) {
             starter.setDeviceName(name)
         }
-//        if (maxMtu != null){
-//            starter.setMtu(maxMtu)
-//        }
+        if (maxMtu != null){
+            starter.setMtu(maxMtu)
+        }
         pendingResult = result
         if (enableUnsafeExperimentalButtonlessServiceInSecureDfu != null) {
             starter.setUnsafeExperimentalButtonlessServiceInSecureDfuEnabled(enableUnsafeExperimentalButtonlessServiceInSecureDfu)
