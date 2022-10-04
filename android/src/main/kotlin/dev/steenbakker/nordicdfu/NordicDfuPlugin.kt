@@ -68,7 +68,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
 
     private fun initiateDfu(call: MethodCall, result: MethodChannel.Result) {
         val address = call.argument<String>("address")
-        val maxMtu = call.argument<int>("maxMtu")
+        val maxMtu = call.argument<Int>("maxMtu")
         val name = call.argument<String>("name")
         var filePath = call.argument<String>("filePath")
         var fileInAsset = call.argument<Boolean>("fileInAsset")
@@ -110,7 +110,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
         }
     }
 
-    private fun startDfu(address: String, maxMtu: UInt, name: String?, filePath: String?, forceDfu: Boolean?, enableUnsafeExperimentalButtonlessServiceInSecureDfu: Boolean?, disableNotification: Boolean?, keepBond: Boolean?, packetReceiptNotificationsEnabled: Boolean?, restoreBond: Boolean?, startAsForegroundService: Boolean?, result: MethodChannel.Result, numberOfPackets: Int?, enablePRNs: Boolean?) {
+    private fun startDfu(address: String, maxMtu: Int, name: String?, filePath: String?, forceDfu: Boolean?, enableUnsafeExperimentalButtonlessServiceInSecureDfu: Boolean?, disableNotification: Boolean?, keepBond: Boolean?, packetReceiptNotificationsEnabled: Boolean?, restoreBond: Boolean?, startAsForegroundService: Boolean?, result: MethodChannel.Result, numberOfPackets: Int?, enablePRNs: Boolean?) {
         val starter = DfuServiceInitiator(address)
                 .setZip(filePath!!)
                 .setKeepBond(true)
@@ -120,13 +120,13 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
                 .setPacketsReceiptNotificationsValue(numberOfPackets ?: 0)
                 .setPrepareDataObjectDelay(400)
                 .setUnsafeExperimentalButtonlessServiceInSecureDfuEnabled(true)
-                .setNumberOfRetries(10)
+                .setNumberOfRetries(10).setMTU(maxMtu)
         if (name != null) {
             starter.setDeviceName(name)
         }
-        if (maxMtu != null){
-            starter.setMtu(maxMtu)
-        }
+//        if (maxMtu != null){
+//            starter.setMtu(maxMtu)
+//        }
         pendingResult = result
         if (enableUnsafeExperimentalButtonlessServiceInSecureDfu != null) {
             starter.setUnsafeExperimentalButtonlessServiceInSecureDfuEnabled(enableUnsafeExperimentalButtonlessServiceInSecureDfu)
