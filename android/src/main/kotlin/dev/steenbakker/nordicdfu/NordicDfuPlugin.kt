@@ -126,7 +126,6 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler,  EventChannel.StreamHa
         }
         if (maxMtu != null){
             starter.setMtu(maxMtu)
-//            starter.setCurrentMtu(maxMtu)
         }
         pendingResult = result
         if (enableUnsafeExperimentalButtonlessServiceInSecureDfu != null) {

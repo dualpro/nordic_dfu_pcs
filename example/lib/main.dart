@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
+  final FlutterBluePlus flutterBlue = FlutterBluePlus();
   StreamSubscription<ScanResult>? scanSubscription;
   List<ScanResult> scanResults = <ScanResult>[];
   bool dfuRunning = false;
@@ -67,7 +67,7 @@ class _MyAppState extends State<MyApp> {
     scanSubscription?.cancel();
     setState(() {
       scanResults.clear();
-      scanSubscription = flutterBlue.scan().listen(
+      scanSubscription = FlutterBluePlus.scan().listen(
         (scanResult) {
           if (scanResults.firstWhereOrNull(
                 (ele) => ele.device.id == scanResult.device.id,
@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void stopScan() {
-    flutterBlue.stopScan();
+    FlutterBluePlus.stopScan();
     scanSubscription?.cancel();
     scanSubscription = null;
     setState(() => scanSubscription = null);
@@ -212,9 +212,7 @@ class DeviceItem extends StatelessWidget {
             ),
             TextButton(
               onPressed: onPress,
-              child: isRunningItem!
-                  ? const Text('Abort Dfu')
-                  : const Text('Start Dfu'),
+              child: isRunningItem! ? const Text('Abort Dfu') : const Text('Start Dfu'),
             )
           ],
         ),
