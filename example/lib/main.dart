@@ -28,8 +28,9 @@ class _MyAppState extends State<MyApp> {
     try {
       final s = await NordicDfu().startDfu(
         deviceId,
-        'assets/file.zip',
+        'assets/03.01.1.008.004.zip',
         fileInAsset: true,
+        // maxMtu: 123,
         onDeviceDisconnecting: (string) {
           debugPrint('deviceAddress: $string');
         },

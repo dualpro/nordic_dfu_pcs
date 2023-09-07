@@ -98,38 +98,39 @@ public class SwiftNordicDfuPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
         enableUnsafeExperimentalButtonlessServiceInSecureDfu: Bool?,
         alternativeAdvertisingNameEnabled: Bool?,
         result: @escaping FlutterResult) {
-        guard let uuid = UUID(uuidString: address) else {
+        
+            guard let uuid = UUID(uuidString: address) else {
             result(FlutterError(code: "DEVICE_ADDRESS_ERROR", message: "Device address conver to uuid failed", details: "Device uuid \(address) convert to uuid failed"))
             return
         }
         
         do{
-        let firmware = try DFUFirmware(urlToZipFile: URL(fileURLWithPath: filePath)) 
+            let firmware = try DFUFirmware(urlToZipFile: URL(fileURLWithPath: filePath))
+                
             
-        
-        
-        let dfuInitiator = DFUServiceInitiator(queue: nil)
-            .with(firmware: firmware);
-        dfuInitiator.delegate = self
-        dfuInitiator.progressDelegate = self
-        dfuInitiator.logger = self
-        
-        if let enableUnsafeExperimentalButtonlessServiceInSecureDfu = enableUnsafeExperimentalButtonlessServiceInSecureDfu {
-            dfuInitiator.enableUnsafeExperimentalButtonlessServiceInSecureDfu = enableUnsafeExperimentalButtonlessServiceInSecureDfu
-        }
-        
-        if let forceDfu = forceDfu {
-            dfuInitiator.forceDfu = forceDfu
-        }
-        
-        if let alternativeAdvertisingNameEnabled = alternativeAdvertisingNameEnabled {
-            dfuInitiator.alternativeAdvertisingNameEnabled = alternativeAdvertisingNameEnabled
-        }
-        
-        pendingResult = result
-        deviceAddress = address
-        
-        dfuController = dfuInitiator.start(targetWithIdentifier: uuid)
+            
+            let dfuInitiator = DFUServiceInitiator(queue: nil)
+                .with(firmware: firmware);
+            dfuInitiator.delegate = self
+            dfuInitiator.progressDelegate = self
+            dfuInitiator.logger = self
+            
+            if let enableUnsafeExperimentalButtonlessServiceInSecureDfu = enableUnsafeExperimentalButtonlessServiceInSecureDfu {
+                dfuInitiator.enableUnsafeExperimentalButtonlessServiceInSecureDfu = enableUnsafeExperimentalButtonlessServiceInSecureDfu
+            }
+            
+            if let forceDfu = forceDfu {
+                dfuInitiator.forceDfu = forceDfu
+            }
+            
+            if let alternativeAdvertisingNameEnabled = alternativeAdvertisingNameEnabled {
+                dfuInitiator.alternativeAdvertisingNameEnabled = alternativeAdvertisingNameEnabled
+            }
+            
+            pendingResult = result
+            deviceAddress = address
+            
+            dfuController = dfuInitiator.start(targetWithIdentifier: uuid)
         }
         catch{
         result(FlutterError(code: "DFU_FIRMWARE_NOT_FOUND", message: "Could not dfu zip file", details: nil))
